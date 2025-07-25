@@ -19,9 +19,7 @@ Yapay zekâ entegrasyonları sayesinde içerik üretimini hızlandıran, sezgise
 
 - Admin, hizmete dair kısa bir açıklama girer (örnek: “Sağlık Sigortası”)
 - Açıklama, **Hugging Face text-to-image API** aracılığıyla işlenir
-- Üretilen görsel:
-  - `Content/AiImages/` klasörüne kaydedilir
-  - İlgili hizmete bağlanır
+- Resmin Url'si Yapay Zeka Tarafından Üretilir ve url kullanılması için admine sunulur.
 
 ### 🧾 İçerik Yönetimi (Tam Yetkili CRUD)
 
