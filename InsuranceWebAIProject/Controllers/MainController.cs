@@ -27,8 +27,8 @@ namespace InsuranceWebAIProject.Controllers
 
         public async Task<ActionResult> Index()
         {
-            string twitterUserId = "2153044145";
-            string instagramUserId = "627447185";
+            string twitterUserId = "";
+            string instagramUserId = "";
 
             int twitterFollowers = await _twitterService.GetFollowersCountAsync(twitterUserId);
             int instagramFollowers = await _instagramService.GetFollowersCountAsync(instagramUserId);
