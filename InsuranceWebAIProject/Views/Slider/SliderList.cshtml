@@ -1,0 +1,44 @@
+﻿﻿@model List<InsuranceWebAIProject.Models.DataModel.Slider>
+
+@{
+    ViewBag.Title = "Slider Listesi";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Slider Listesi</h2>
+
+<a href="@Url.Action("CreateSlider", "Slider")" class="btn btn-primary mb-3">Yeni Slider Ekle</a>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Başlık</th>
+            <th>Alt Başlık</th>
+            <th>Açıklama</th>
+            <th>Resim</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SliderId</td>
+                <td>@item.SliderTitle</td>
+                <td>@item.SliderSubtitle</td>
+                <td>@item.SliderDescription</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.SliderImageUrl))
+                    {
+                        <img src="@item.SliderImageUrl" alt="Slider Resmi" style="width:70px; height:40px; object-fit:cover;" />
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("UpdateSlider", "Slider", new { id = item.SliderId })" class="btn btn-warning btn-sm">Güncelle</a>
+                    <a href="@Url.Action("DeleteSlider", "Slider", new { id = item.SliderId })" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

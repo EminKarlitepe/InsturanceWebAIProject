@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>Welcome!</value>
+  </data>
+  <data name="Menu_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Menu_Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="Menu_Blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="Menu_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Btn_GetQuote" xml:space="preserve">
+    <value>Get a Quote</value>
+  </data>
+  <data name="Footer_Copy" xml:space="preserve">
+    <value>All rights reserved.</value>
+  </data>
+</root> 

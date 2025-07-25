@@ -1,0 +1,70 @@
+﻿@model List<InsuranceWebAIProject.Models.ViewModels.TestimonialViewModel>
+
+@{
+    ViewBag.Title = "Team Listesi";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Team Listesi</h2>
+
+<a href="@Url.Action("CreateTeam", "Team")" class="btn btn-primary mb-3">Yeni Ekip Üyesi Ekle</a>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Adı</th>
+            <th>Görev</th>
+            <th>Facebook</th>
+            <th>Twitter</th>
+            <th>LinkedIn</th>
+            <th>Instagram</th>
+            <th>Resim</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Position</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.FacebookUrl))
+                    {
+                        <a href="@item.FacebookUrl" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.TwitterUrl))
+                    {
+                        <a href="@item.TwitterUrl" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.LinkedInUrl))
+                    {
+                        <a href="@item.LinkedInUrl" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.InstagramUrl))
+                    {
+                        <a href="@item.InstagramUrl" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="Resim" style="width:80px; height:50px; object-fit:cover;" />
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("UpdateTeam", "Team", new { id = item.Id })" class="btn btn-warning btn-sm">Güncelle</a>
+                    <a href="@Url.Action("DeleteTeam", "Team", new { id = item.Id })" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

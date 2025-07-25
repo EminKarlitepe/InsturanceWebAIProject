@@ -1,0 +1,100 @@
+﻿@model InsuranceWebAIProject.Models.DataModel.Testimonial
+
+@{
+    ViewBag.Title = "Yeni Referans Ekle";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Yeni Referans Ekle</h2>
+
+@using (Html.BeginForm("CreateTestimonial", "Testimonial", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.TestimonialName)
+        @Html.TextBoxFor(m => m.TestimonialName, new { @class = "form-control", placeholder = "Ad" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.TestimonialSurname)
+        @Html.TextBoxFor(m => m.TestimonialSurname, new { @class = "form-control", placeholder = "Soyad" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.TestimonialJob)
+        @Html.TextBoxFor(m => m.TestimonialJob, new { @class = "form-control", placeholder = "Meslek" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.TestimonialPoint)
+        @Html.TextBoxFor(m => m.TestimonialPoint, new { @class = "form-control", placeholder = "Puan" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.TestimonialComment)
+        @Html.TextAreaFor(m => m.TestimonialComment, new { @class = "form-control", rows = 4, placeholder = "Yorum" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.TestimonialImageUrl)
+        @Html.TextBoxFor(m => m.TestimonialImageUrl, new { @class = "form-control", placeholder = "Resim URL" })
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+    </div>
+}
+
+<style>
+    .form-group label {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        padding: 12px 15px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        width: 100%;
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+            outline: none;
+        }
+
+    .btn-success {
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        margin-top: 20px;
+        color: white;
+        cursor: pointer;
+    }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+            border-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+    h2 {
+        color: #34495e;
+        margin-bottom: 30px;
+        font-weight: 600;
+        text-align: center;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+</style>

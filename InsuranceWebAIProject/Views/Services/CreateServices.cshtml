@@ -1,0 +1,99 @@
+﻿﻿@model InsuranceWebAIProject.Models.DataModel.Services
+
+@{
+    ViewBag.Title = "CreateServices";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-4">
+    <div class="alert alert-primary"><h2>Yeni Hizmet Ekle</h2></div>
+
+    @using (Html.BeginForm("CreateServices", "Services", FormMethod.Post))
+    {
+        <label>Card Ikon</label>
+        @Html.TextBoxFor(m => m.ServicesCardIcon, new { @class = "form-control", placeholder = "Card ikon giriniz", id = "ServicesCardIcon" })
+        <br />
+
+        <label>Card Başlık</label>
+        @Html.TextBoxFor(m => m.ServicesCardTitle, new { @class = "form-control", placeholder = "Card başlık giriniz", id = "ServicesCardTitle" })
+        <br />
+
+        <label>Card Açıklama</label>
+        @Html.TextBoxFor(m => m.ServicesCardDescription, new { @class = "form-control", placeholder = "Card açıklama giriniz", id = "ServicesCardDescription" })
+        <br />
+
+        <label>Card Resim URL</label>
+        @Html.TextBoxFor(m => m.ServicesCardImageUrl, new { @class = "form-control", placeholder = "Resim URL giriniz", id = "ServicesCardImageUrl" })
+        <br />
+
+        <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+    }
+</div>
+
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <strong>Yapay Zeka ile Görsel Oluştur</strong>
+        </div>
+        <div class="card-body">
+            <div class="form-group mb-3">
+                <label for="aiImagePrompt" class="form-label">Görsel Açıklaması (Prompt)</label>
+                <input type="text" id="aiImagePrompt" class="form-control" placeholder="Örneğin: Diş sigortası hizmeti" />
+            </div>
+            <button type="button" class="btn btn-primary" onclick="generateAIImage()">Yapay Zeka ile Görsel Oluştur</button>
+            <div id="aiImageResult" class="mt-4" style="display:none;">
+                <div class="alert alert-secondary text-center">
+                    <img id="generatedImage" src="" alt="Oluşturulan Görsel" class="img-fluid rounded border border-secondary mb-2" style="max-width: 50%; height: auto;" />
+                    <br />
+                    <label class="mt-2">Oluşturulan Görsel URL'si</label>
+                    <input type="text" id="generatedImageUrl" class="form-control mb-2" readonly />
+                    <button type="button" class="btn btn-success mt-2" onclick="useGeneratedImage()">Bu Görseli Formda Kullan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function generateAIImage() {
+        const prompt = document.getElementById('aiImagePrompt').value.trim();
+        if (!prompt) {
+            alert('Lütfen görsel açıklaması (prompt) girin.');
+            return;
+        }
+
+        const aiImageResult = document.getElementById('aiImageResult');
+        const generatedImage = document.getElementById('generatedImage');
+        const generatedImageUrl = document.getElementById('generatedImageUrl');
+
+
+        try {
+            const response = await fetch('/Services/GenerateAIImage?prompt=' + encodeURIComponent(prompt));
+            const data = await response.json();
+
+            if (data.error) {
+                alert('Hata: ' + data.error);
+                aiImageResult.style.display = 'none';
+                return;
+            }
+
+            generatedImage.src = data.imageUrl;
+            generatedImageUrl.value = data.imageUrl;
+            aiImageResult.style.display = 'block';
+        }
+        catch (error) {
+            alert('Görsel oluşturulurken hata oluştu.');
+            aiImageResult.style.display = 'none';
+            console.error(error);
+        }
+    }
+
+    function useGeneratedImage() {
+        const imageUrl = document.getElementById('generatedImageUrl').value;
+        document.getElementById('ServicesCardImageUrl').value = imageUrl;
+        alert('Görsel URL\'si form alanına eklendi.');
+    }
+</script>

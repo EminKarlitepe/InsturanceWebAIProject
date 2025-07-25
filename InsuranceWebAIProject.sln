@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceWebAIProject", "InsuranceWebAIProject\InsuranceWebAIProject.csproj", "{9CE56AE0-22DE-4365-9EAF-0D9C64D6161B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CE56AE0-22DE-4365-9EAF-0D9C64D6161B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE56AE0-22DE-4365-9EAF-0D9C64D6161B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE56AE0-22DE-4365-9EAF-0D9C64D6161B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE56AE0-22DE-4365-9EAF-0D9C64D6161B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8D0CCBC-FFA6-4680-9122-DC144D062B32}
+	EndGlobalSection
+EndGlobal

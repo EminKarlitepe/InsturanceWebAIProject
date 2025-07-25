@@ -1,0 +1,36 @@
+﻿﻿@model InsuranceWebAIProject.Models.DataModel.Services
+
+@{
+    ViewBag.Title = "UpdateServices";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-4">
+    <div class="alert alert-warning"><h2>Hizmet Güncelle</h2></div>
+
+    @using (Html.BeginForm("UpdateServices", "Services", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.ServicesId)
+
+        <label>Card Ikon</label>
+        @Html.TextBoxFor(m => m.ServicesCardIcon, new { @class = "form-control", placeholder = "Card ikon giriniz" })
+        <br />
+
+        <label>Card Başlık</label>
+        @Html.TextBoxFor(m => m.ServicesCardTitle, new { @class = "form-control", placeholder = "Card başlık giriniz" })
+        <br />
+
+        <label>Card Açıklama</label>
+        @Html.TextBoxFor(m => m.ServicesCardDescription, new { @class = "form-control", placeholder = "Card açıklama giriniz" })
+        <br />
+
+        <label>Card Resim URL</label>
+        @Html.TextBoxFor(m => m.ServicesCardImageUrl, new { @class = "form-control", placeholder = "Resim URL giriniz" })
+        <br />
+
+        <button type="submit" class="btn btn-success">Güncelle</button>
+
+    }
+</div>

@@ -1,0 +1,77 @@
+﻿@model InsuranceWebAIProject.Models.DataModel.Contact
+
+@{
+    ViewBag.Title = "UpdateContact";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<h2>İletişim Güncelle</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.CommunicationId)
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.Adress)
+        @Html.TextBoxFor(m => m.Adress, new { @class = "form-control", placeholder = "Adres" })
+    </div>
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.Mail)
+        @Html.TextBoxFor(m => m.Mail, new { @class = "form-control", placeholder = "Mail" })
+    </div>
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.Telephone)
+        @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control", placeholder = "Telefon" })
+    </div>
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary mt-3">Güncelle</button>
+    </div>
+}
+
+<style>
+    .form-group label {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        padding: 12px 15px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+        }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #3498db;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        margin-top: 20px;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+        }
+
+    h2 {
+        color: #34495e;
+        margin-bottom: 30px;
+        font-weight: 600;
+        text-align: center;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+</style>

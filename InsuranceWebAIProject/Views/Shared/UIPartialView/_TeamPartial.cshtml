@@ -1,0 +1,65 @@
+﻿@model List<InsuranceWebAIProject.Models.ViewModel.TeamViewModel>
+
+<div class="container-fluid team pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Ekibimiz</h4>
+            <h1 class="display-4 mb-4">Uzman Ekibimizle Tanışın</h1>
+            <p class="mb-0">
+                Sigortacılık alanındaki uzman kadromuz, sizlere en iyi hizmeti sunmak için burada. Deneyimli, güvenilir ve alanında profesyonel ekibimizle tanışın.
+            </p>
+        </div>
+        <div class="row g-4">
+            @if (Model != null && Model.Any())
+            {
+                var delay = 0.2;
+                foreach (var item in Model)
+                {
+                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="@($"{delay}s")">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="@Url.Content(item.ImageUrl ?? "~/LifeSure-1.0.0/img/default-team.jpg")"
+                                     class="img-fluid rounded-top w-100" alt="@item.Name" />
+                                <div class="team-icon">
+                                    @if (!string.IsNullOrWhiteSpace(item.FacebookUrl))
+                                    {
+                                        <a class="btn btn-primary btn-sm-square rounded-pill mb-2" href="@item.FacebookUrl" target="_blank" rel="noopener">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(item.TwitterUrl))
+                                    {
+                                        <a class="btn btn-primary btn-sm-square rounded-pill mb-2" href="@item.TwitterUrl" target="_blank" rel="noopener">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(item.LinkedInUrl))
+                                    {
+                                        <a class="btn btn-primary btn-sm-square rounded-pill mb-2" href="@item.LinkedInUrl" target="_blank" rel="noopener">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </a>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(item.InstagramUrl))
+                                    {
+                                        <a class="btn btn-primary btn-sm-square rounded-pill mb-0" href="@item.InstagramUrl" target="_blank" rel="noopener">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="team-title p-4">
+                                <h4 class="mb-0">@item.Name</h4>
+                                <p class="mb-0">@item.Position</p>
+                            </div>
+                        </div>
+                    </div>
+                    delay += 0.2;
+                }
+            }
+            else
+            {
+                <p class="text-center">Ekibimiz hakkında bilgi bulunmamaktadır.</p>
+            }
+        </div>
+    </div>
+</div>

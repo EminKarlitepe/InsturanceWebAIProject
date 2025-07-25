@@ -1,0 +1,514 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karlıtepe Yönetim Paneli - Gelişmiş</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db; /* Parlak Mavi */
+            --secondary-color: #2c3e50; /* Koyu Lacivert */
+            --light-gray: #ecf0f1; /* Açık Gri */
+            --dark-gray: #333;
+            --background-light: #f5f7fa; /* Çok Açık Gri Arka Plan */
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition-speed: 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-light);
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Yenilemeleri */
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--secondary-color);
+            color: white;
+            box-shadow: var(--card-shadow);
+            padding-top: 20px;
+            transition: width var(--transition-speed), transform var(--transition-speed);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            z-index: 1000;
+        }
+
+            .sidebar.collapsed {
+                width: 80px;
+            }
+
+                .sidebar.collapsed .logo,
+                .sidebar.collapsed .sidebar-text {
+                    display: none;
+                }
+
+                .sidebar.collapsed a {
+                    justify-content: center;
+                }
+
+                    .sidebar.collapsed a i {
+                        margin-right: 0;
+                    }
+
+
+            .sidebar .logo {
+                text-align: center;
+                padding-bottom: 30px;
+                font-size: 1.8rem;
+                font-weight: 600;
+                color: var(--light-gray);
+                transition: opacity var(--transition-speed);
+            }
+
+            .sidebar a {
+                color: var(--light-gray);
+                padding: 15px 25px;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                transition: background-color var(--transition-speed), color var(--transition-speed), transform 0.2s ease;
+                border-radius: 8px;
+                margin: 0 15px 8px 15px;
+            }
+
+                .sidebar a i {
+                    margin-right: 15px;
+                    font-size: 1.15rem;
+                    color: var(--light-gray);
+                    transition: margin-right var(--transition-speed), color var(--transition-speed);
+                }
+
+                .sidebar a:hover {
+                    background-color: rgba(52, 152, 219, 0.2);
+                    color: var(--primary-color);
+                    transform: translateY(-2px);
+                }
+
+                .sidebar a.active {
+                    background-color: var(--primary-color);
+                    color: white;
+                    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+                }
+
+                    .sidebar a.active i {
+                        color: white;
+                    }
+
+
+        /* Topbar Yenilemeleri */
+        .topbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 30px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            width: calc(100% - 250px);
+            margin-left: 250px;
+            transition: width var(--transition-speed), margin-left var(--transition-speed);
+        }
+
+            .topbar.shifted {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+            }
+
+            .topbar strong {
+                font-size: 1.3rem;
+                color: #555;
+            }
+
+            .topbar span {
+                font-size: 1rem;
+                color: #777;
+            }
+
+            .topbar i {
+                margin-right: 8px;
+                color: var(--primary-color);
+            }
+
+        /* Bildirim Özelliği Stil Adayı */
+        .notification-dropdown {
+            position: relative;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+            .notification-dropdown .fa-bell {
+                font-size: 1.4rem;
+                color: #666;
+                transition: color 0.2s ease, transform 0.2s ease;
+            }
+
+                .notification-dropdown .fa-bell:hover {
+                    color: var(--primary-color);
+                    transform: rotate(15deg); /* Hafif sallanma efekti */
+                }
+
+            .notification-dropdown .badge {
+                position: absolute;
+                top: -5px;
+                right: -10px;
+                padding: 4px 8px;
+                border-radius: 50%;
+                background-color: #e74c3c; /* Kırmızı renk */
+                color: white;
+                font-size: 0.75rem;
+                font-weight: 600;
+            }
+
+        .notification-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            z-index: 1001;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+        }
+
+            .notification-menu.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .notification-menu .notification-item {
+                padding: 10px 20px;
+                border-bottom: 1px solid #f0f0f0;
+                display: flex;
+                align-items: center;
+                transition: background-color 0.1s ease;
+            }
+
+                .notification-menu .notification-item:last-child {
+                    border-bottom: none;
+                }
+
+                .notification-menu .notification-item:hover {
+                    background-color: #f8f8f8;
+                }
+
+                .notification-menu .notification-item i {
+                    margin-right: 10px;
+                    color: var(--primary-color);
+                }
+
+                .notification-menu .notification-item .text-muted {
+                    font-size: 0.85rem;
+                }
+
+            .notification-menu .notification-footer {
+                padding: 10px 20px 5px;
+                text-align: center;
+                border-top: 1px solid #f0f0f0;
+            }
+
+                .notification-menu .notification-footer a {
+                    color: var(--primary-color);
+                    text-decoration: none;
+                    font-size: 0.9rem;
+                }
+
+                    .notification-menu .notification-footer a:hover {
+                        text-decoration: underline;
+                    }
+
+
+        /* Content Area Yenilemeleri */
+        .content-area {
+            padding: 30px;
+            background-color: var(--background-light);
+            min-height: calc(100vh - 70px);
+            margin-left: 250px;
+            transition: margin-left var(--transition-speed);
+        }
+
+            .content-area.shifted {
+                margin-left: 80px;
+            }
+
+        /* Genel Bileşen Stilleri (Ekstra) */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+            }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-weight: 600;
+            color: #495057;
+            padding: 18px 25px;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color var(--transition-speed), transform 0.2s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #2980b9;
+                border-color: #2980b9;
+                transform: translateY(-2px);
+            }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 10px 15px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .form-control:focus {
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+            }
+
+        /* Özel Bileşenler */
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--dark-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+            .toggle-btn:hover {
+                transform: scale(1.1);
+            }
+
+        /* Responsive Ayarlamalar */
+        @@media (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+                transform: translateX(0);
+            }
+
+                .sidebar .logo,
+                .sidebar .sidebar-text {
+                    display: none;
+                }
+
+                .sidebar a {
+                    justify-content: center;
+                    padding: 15px 0;
+                    margin: 0 5px 8px 5px;
+                }
+
+                    .sidebar a i {
+                        margin-right: 0;
+                    }
+
+            .topbar, .content-area {
+                margin-left: 80px;
+                width: calc(100% - 80px);
+            }
+
+                .topbar.shifted, .content-area.shifted {
+                    margin-left: 0;
+                    width: 100%;
+                }
+        }
+
+        @@media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                height: 100%;
+                width: 250px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            }
+
+                .sidebar.show {
+                    transform: translateX(0);
+                }
+
+            .topbar {
+                width: 100%;
+                margin-left: 0;
+                padding: 15px 20px;
+            }
+
+                .topbar strong {
+                    font-size: 1.1rem;
+                }
+
+                .topbar span {
+                    font-size: 0.9rem;
+                }
+
+            .content-area {
+                margin-left: 0;
+                padding: 20px;
+                min-height: calc(100vh - 60px);
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <div class="sidebar" id="sidebar">
+            <div class="logo">Karlıtepe Admin</div>
+            <a href="/About/AboutList"><i class="fa-solid fa-info-circle"></i><span class="sidebar-text">Hakkımızda</span></a>
+            <a href="/Feature/FeatureList"><i class="fa-solid fa-star"></i><span class="sidebar-text">Özellikler</span></a>
+            <a href="/Slider/SliderList"><i class="fa-solid fa-circle-question"></i><span class="sidebar-text">Slaytlar</span></a>
+            <a href="/Services/ServicesList"><i class="fa-solid fa-concierge-bell"></i><span class="sidebar-text">Hizmetler</span></a>
+            <a href="/Team/TeamList"><i class="fa-solid fa-user-tie"></i><span class="sidebar-text">Çalışanlar</span></a>
+            <a href="/Faq/FaqList"><i class="fa-solid fa-circle-question"></i><span class="sidebar-text">Sıkça Sorulan Sorular</span></a>
+            <a href="/Testimonial/TestimonialList"><i class="fa-solid fa-comment-dots"></i><span class="sidebar-text">Referanslar</span></a>
+        </div>
+
+        <div class="flex-grow-1 d-flex flex-column" id="main-content-wrapper">
+            <div class="topbar d-flex justify-content-between align-items-center" id="topbar">
+                <button class="toggle-btn d-lg-none" id="sidebarToggleMobile"><i class="fas fa-bars"></i></button>
+                <button class="toggle-btn d-none d-lg-block" id="sidebarToggleDesktop"><i class="fas fa-bars"></i></button>
+                <span><strong>Yönetim Paneli</strong></span>
+                <div class="d-flex align-items-center">
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notificationCount">3</span>
+                        <div class="notification-menu" id="notificationMenu">
+                            <div class="notification-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    Yeni Mesaj: **Emre Yılmaz**
+                                    <div class="text-muted">Şimdi</div>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-user-plus"></i>
+                                <div>
+                                    Yeni Kayıt: **Ayşe Demir**
+                                    <div class="text-muted">15 dakika önce</div>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <div>
+                                    Sistem Uyarısı: **Veritabanı Bakımı**
+                                    <div class="text-muted">1 saat önce</div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="/Notifications/All">Tüm Bildirimleri Gör</a>
+                            </div>
+                        </div>
+                    </div>
+                    <span><i class="fa-solid fa-user-shield"></i>Admin</span>
+                </div>
+            </div>
+            <div class="content-area flex-grow-1" id="content-area">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const currentPath = window.location.pathname;
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            const sidebar = document.getElementById('sidebar');
+            const topbar = document.getElementById('topbar');
+            const contentArea = document.getElementById('content-area');
+            const sidebarToggleDesktop = document.getElementById('sidebarToggleDesktop');
+            const sidebarToggleMobile = document.getElementById('sidebarToggleMobile');
+
+            // Aktif menü öğesini vurgulama
+            sidebarLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Masaüstü Sidebar Toggle
+            if (sidebarToggleDesktop) {
+                sidebarToggleDesktop.addEventListener('click', function () {
+                    sidebar.classList.toggle('collapsed');
+                    topbar.classList.toggle('shifted');
+                    contentArea.classList.toggle('shifted');
+                });
+            }
+
+            // Mobil Sidebar Toggle
+            if (sidebarToggleMobile) {
+                sidebarToggleMobile.addEventListener('click', function () {
+                    sidebar.classList.toggle('show');
+                });
+            }
+
+            // Dışarı tıklama ile mobil sidebar'ı kapatma
+            document.addEventListener('click', function (event) {
+                if (sidebar.classList.contains('show') &&
+                    !sidebar.contains(event.target) &&
+                    !sidebarToggleMobile.contains(event.target)) {
+                    sidebar.classList.remove('show');
+                }
+            });
+
+            // Bildirim Dropdown İşlevselliği
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            const notificationMenu = document.getElementById('notificationMenu');
+
+            if (notificationDropdown && notificationMenu) {
+                notificationDropdown.addEventListener('click', function (event) {
+                    event.stopPropagation(); // Dropdown içindeki tıklamaların belgeye yayılmasını engeller
+                    notificationMenu.classList.toggle('show');
+                });
+
+                // Belgenin herhangi bir yerine tıklandığında bildirimi kapat
+                document.addEventListener('click', function (event) {
+                    if (notificationMenu.classList.contains('show') &&
+                        !notificationDropdown.contains(event.target) &&
+                        !notificationMenu.contains(event.target)) {
+                        notificationMenu.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+﻿@model InsuranceWebAIProject.Models.DataModel.About
+
+@{
+    ViewBag.Title = "About Güncelle";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="mb-0 text-center">Hakkımızda Bilgisi Güncelle</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("UpdateAbout", "About", FormMethod.Post, new { area = "Admin" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger mb-4" })
+                        @Html.HiddenFor(m => m.AboutId)
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AboutTitle)
+                                    @Html.TextBoxFor(m => m.AboutTitle, new { @class = "form-control", placeholder = "Ör: Şirketimizin Temelleri" })
+                                    @Html.ValidationMessageFor(m => m.AboutTitle, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AboutSubtitle)
+                                    @Html.TextBoxFor(m => m.AboutSubtitle, new { @class = "form-control", placeholder = "Ör: Misyonumuz ve Vizyonumuz" })
+                                    @Html.ValidationMessageFor(m => m.AboutSubtitle, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AboutDescription1)
+                                @Html.TextAreaFor(m => m.AboutDescription1, new { @class = "form-control", rows = 4, placeholder = "Ör: Şirketimizin kuruluş hikayesini ve değerlerini açıklayın..." })
+                                @Html.ValidationMessageFor(m => m.AboutDescription1, "", new { @class = "field-validation-error" })
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AboutDescription2)
+                                @Html.TextAreaFor(m => m.AboutDescription2, new { @class = "form-control", rows = 4, placeholder = "Ör: Gelecek hedeflerimizi ve sektördeki yerimizi belirtin..." })
+                                @Html.ValidationMessageFor(m => m.AboutDescription2, "", new { @class = "field-validation-error" })
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h5 class="text-center mb-4" style="color: #34495e;">Slogan Bilgileri</h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AboutSlogan1)
+                                    @Html.TextBoxFor(m => m.AboutSlogan1, new { @class = "form-control", placeholder = "Ör: Müşteri Memnuniyeti" })
+                                    @Html.ValidationMessageFor(m => m.AboutSlogan1, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AboutSlogan2)
+                                    @Html.TextBoxFor(m => m.AboutSlogan2, new { @class = "form-control", placeholder = "Ör: Güvenilir Hizmet" })
+                                    @Html.ValidationMessageFor(m => m.AboutSlogan2, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AboutSlogan3)
+                                    @Html.TextBoxFor(m => m.AboutSlogan3, new { @class = "form-control", placeholder = "Ör: Yenilikçi Çözümler" })
+                                    @Html.ValidationMessageFor(m => m.AboutSlogan3, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h5 class="text-center mb-4" style="color: #34495e;">Sayısal Veriler</h5>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InsurancePoliciesCount)
+                                    @Html.TextBoxFor(m => m.InsurancePoliciesCount, new { @class = "form-control", type = "number", placeholder = "Ör: 1200" })
+                                    @Html.ValidationMessageFor(m => m.InsurancePoliciesCount, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AwardsCount)
+                                    @Html.TextBoxFor(m => m.AwardsCount, new { @class = "form-control", type = "number", placeholder = "Ör: 15" })
+                                    @Html.ValidationMessageFor(m => m.AwardsCount, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SkilledAgentsCount)
+                                    @Html.TextBoxFor(m => m.SkilledAgentsCount, new { @class = "form-control", type = "number", placeholder = "Ör: 25" })
+                                    @Html.ValidationMessageFor(m => m.SkilledAgentsCount, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TeamMembersCount)
+                                    @Html.TextBoxFor(m => m.TeamMembersCount, new { @class = "form-control", type = "number", placeholder = "Ör: 40" })
+                                    @Html.ValidationMessageFor(m => m.TeamMembersCount, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ImageUrl)
+                                @Html.TextBoxFor(m => m.ImageUrl, new { @class = "form-control", placeholder = "Ör: /images/hakkimizda.jpg" })
+                                @Html.ValidationMessageFor(m => m.ImageUrl, "", new { @class = "field-validation-error" })
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-3">
+                                <i class="fas fa-edit me-2"></i> Bilgileri Güncelle
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .form-section {
+        margin-bottom: 25px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-group label {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        padding: 12px 15px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+        }
+
+    .field-validation-error {
+        color: #e74c3c;
+        font-size: 0.85em;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .btn-success {
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        margin-top: 20px;
+    }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+            border-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+    h2 {
+        color: #34495e;
+        margin-bottom: 30px;
+        font-weight: 600;
+        text-align: center;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

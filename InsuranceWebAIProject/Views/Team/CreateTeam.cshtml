@@ -1,0 +1,154 @@
+﻿@model InsuranceWebAIProject.Models.DataModel.Team
+
+@{
+    ViewBag.Title = "Yeni Ekip Üyesi Ekle";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="mb-0 text-center">Yeni Ekip Üyesi Ekle</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("CreateTeam", "Team", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger mb-4" })
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Name)
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Ör: David James" })
+                                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Position)
+                                    @Html.TextBoxFor(m => m.Position, new { @class = "form-control", placeholder = "Ör: Sigorta Danışmanı" })
+                                    @Html.ValidationMessageFor(m => m.Position, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ImageUrl)
+                                @Html.TextBoxFor(m => m.ImageUrl, new { @class = "form-control", placeholder = "/images/team-1.jpg" })
+                                @Html.ValidationMessageFor(m => m.ImageUrl, "", new { @class = "field-validation-error" })
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h5 class="text-center mb-4" style="color: #34495e;">Sosyal Medya Linkleri</h5>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.FacebookUrl)
+                                    @Html.TextBoxFor(m => m.FacebookUrl, new { @class = "form-control", placeholder = "https://facebook.com/david" })
+                                    @Html.ValidationMessageFor(m => m.FacebookUrl, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TwitterUrl)
+                                    @Html.TextBoxFor(m => m.TwitterUrl, new { @class = "form-control", placeholder = "https://twitter.com/david" })
+                                    @Html.ValidationMessageFor(m => m.TwitterUrl, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.LinkedInUrl)
+                                    @Html.TextBoxFor(m => m.LinkedInUrl, new { @class = "form-control", placeholder = "https://linkedin.com/in/david" })
+                                    @Html.ValidationMessageFor(m => m.LinkedInUrl, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InstagramUrl)
+                                    @Html.TextBoxFor(m => m.InstagramUrl, new { @class = "form-control", placeholder = "https://instagram.com/david" })
+                                    @Html.ValidationMessageFor(m => m.InstagramUrl, "", new { @class = "field-validation-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-3">
+                                <i class="fas fa-save me-2"></i> Kaydet
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-group label {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        padding: 12px 15px;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+        }
+
+    .field-validation-error {
+        color: #e74c3c;
+        font-size: 0.85em;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .btn-success {
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        margin-top: 20px;
+    }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+            border-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+    h2 {
+        color: #34495e;
+        margin-bottom: 30px;
+        font-weight: 600;
+        text-align: center;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

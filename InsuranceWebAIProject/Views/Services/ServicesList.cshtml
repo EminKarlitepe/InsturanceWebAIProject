@@ -1,0 +1,49 @@
+﻿﻿@model List<InsuranceWebAIProject.Models.DataModel.Services>
+
+@{
+    ViewBag.Title = "ServiesList";
+    Layout = "~/Views/Shared/Layout/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-4">
+    <div class="alert alert-info"><h2>Hizmetler Listesi</h2></div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+
+                <th>Card Ikon</th>
+                <th>Card Başlık</th>
+                <th>Card Açıklama</th>
+                <th>Card Resim URL</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ServicesId</td>
+
+                    <td>@item.ServicesCardIcon</td>
+                    <td>@item.ServicesCardTitle</td>
+                    <td>@item.ServicesCardDescription</td>
+                    <td>@item.ServicesCardImageUrl</td>
+                    <td>
+                        <a href="/Services/UpdateServices/@item.ServicesId" class="btn btn-warning btn-sm">Güncelle</a>
+                        @using (Html.BeginForm("DeleteServices", "Services", FormMethod.Post))
+                        {
+                            @Html.Hidden("id", item.ServicesId)
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/Services/CreateServices" class="btn btn-primary">Yeni Hizmet Ekle</a>
+</div>
