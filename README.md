@@ -95,7 +95,6 @@ Yapay zekâ entegrasyonları sayesinde içerik üretimini hızlandıran, sezgise
 ## ADMIN PAGE
 |-----------------------------|
 <img width="1898" height="904" alt="AdminAbout" src="https://github.com/user-attachments/assets/e5dde86e-cd5e-4925-95cd-8bf4e77b2b84" />
+<img width="1895" height="899" alt="AIImageGenerator" src="https://github.com/user-attachments/assets/5da7cb7e-0e12-4f7f-95c4-2e402a878c33" />
 <img width="1916" height="906" alt="AdminFaq" src="https://github.com/user-attachments/assets/4dcb414e-6ed7-48d4-8396-b7b1cd007424" />
 <img width="1910" height="892" alt="AdminFaq (2)" src="https://github.com/user-attachments/assets/d35efc6e-0414-4f36-b507-7f995e35a545" />
-<img width="1895" height="899" alt="AIImageGenerator" src="https://github.com/user-attachments/assets/5da7cb7e-0e12-4f7f-95c4-2e402a878c33" />
-<img width="1910" height="892" alt="AdminFaq (2)" src="https://github.com/user-attachments/assets/10ffaf36-b550-4f6c-a4f0-236812bd7aa3" />
